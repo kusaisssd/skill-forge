@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { Exercise, Lesson, Level, Skill } from '../models/course.model';
 import { SKILLS } from '../data/skills';
 import { ANGULAR_EXERCISES } from '../data/angular-exercises';
-import { ANGULAR_SUMMARIES_AR } from '../data/angular-summaries-ar';
+import {
+  ANGULAR_SUMMARIES_AR,
+  ArabicSection,
+} from '../data/angular-summaries-ar';
 
 export interface LessonLocation {
   skill: Skill;
@@ -41,8 +44,8 @@ export class SkillsService {
     return [];
   }
 
-  /** Arabic summary (ملخص عربي) for a lesson, if authored. */
-  getSummaryAr(skillId: string, lessonId: string): string | undefined {
+  /** Arabic section (ملخص + تفاصيل أوسع) for a lesson, if authored. */
+  getSummaryAr(skillId: string, lessonId: string): ArabicSection | undefined {
     if (skillId === 'angular') {
       return ANGULAR_SUMMARIES_AR[lessonId];
     }

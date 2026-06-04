@@ -73,7 +73,15 @@
           <h2 class="ar-title">
             <mat-icon>translate</mat-icon> الملخص بالعربية
           </h2>
-          <p class="ar-body">{{ ar }}</p>
+          <p class="ar-body">{{ ar.summary }}</p>
+
+          <h2 class="ar-title ar-details-title">
+            <mat-icon>auto_stories</mat-icon> معرفة أوسع
+          </h2>
+          @for (d of ar.details; track $index) {
+            <h3 class="ar-detail-heading">{{ d.heading }}</h3>
+            <p class="ar-body">{{ d.body }}</p>
+          }
         </mat-card-content>
       </mat-card>
     }
