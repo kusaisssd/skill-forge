@@ -1,0 +1,108 @@
+<div class="exercise" [class.solved]="solved()">
+  <div class="ex-head">
+    <mat-icon class="ex-type-icon">{{
+      exercise().type === 'arrange' ? 'reorder' : 'edit'
+    }}</mat-icon>
+    <span class="ex-prompt">{{ exercise().prompt }}</span>
+    @if (solved()) {
+      <mat-icon class="ex-done" matTooltip="Solved">check_circle</mat-icon>
+    }
+  </div>
+
+  <!-- FILL IN THE BLANK -->
+  @if (exercise().type === 'fill-blank') {
+    <div class="fill-code">
+      @for (seg of segments(); track $index; let last = $last) {
+        <span class="seg">{{ seg }}</span>
+        @if (!last) {
+          <input
+            class="blank"
+            [class.ok]="checked() && blankCorrect($index)"
+            [class.bad]="checked() && !blankCorrect($index)"
+            [value]="answers()[$index] || ''"
+            [disabled]="solved()"
+            spellcheck="false"
+            autocomplete="off"
+            placeholder="?"
+            (input)="setAnswer($index, $any($event.target).value)"
+          />
+        }
+      }
+    </div>
+
+    @if (exercise().blanks && exercise().blanks!.length > 0) {
+      <div class="hints">
+        @for (b of exercise().blanks!; track $index) {
+          @if (b.hint) {
+            <span class="hint">
+              <mat-icon>tips_and_updates</mat-icon>
+              Blank {{ $index + 1 }}: {{ b.hint }}
+            </span>
+          }
+        }
+      </div>
+    }
+  }
+
+  <!-- ARRANGE THE LINES -->
+  @if (exercise().type === 'arrange') {
+    <p class="arrange-tip">
+      <mat-icon>drag_indicator</mat-icon> Drag the lines into the correct order.
+    </p>
+    <div cdkDropList class="arrange-list" (cdkDropListDropped)="drop($event)">
+      @for (line of order(); track line; let i = $index) {
+        <div
+          class="arrange-item"
+          cdkDrag
+          [class.ok]="checked() && lineCorrect(i)"
+          [class.bad]="checked() && !lineCorrect(i)"
+        >
+          <mat-icon class="grip">drag_indicator</mat-icon>
+          <code>{{ line }}</code>
+          <span class="line-no">{{ i + 1 }}</span>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- FEEDBACK -->
+  @if (checked() && !solved()) {
+    <p class="feedback bad-msg">
+      <mat-icon>error_outline</mat-icon> Not quite — adjust the highlighted parts
+      and check again.
+    </p>
+  }
+  @if (solved()) {
+    <p class="feedback ok-msg">
+      <mat-icon>verified</mat-icon> Correct! {{ exercise().explanation }}
+    </p>
+  }
+  @if (revealed() && !solved()) {
+    <div class="answer-reveal">
+      <span class="answer-label">Answer</span>
+      <pre>{{ revealedAnswer() }}</pre>
+      <span class="answer-explain">{{ exercise().explanation }}</span>
+    </div>
+  }
+
+  <!-- ACTIONS -->
+  <div class="ex-actions">
+    @if (!solved()) {
+      <button mat-flat-button color="primary" (click)="check()">
+        <mat-icon>play_arrow</mat-icon> Check
+      </button>
+      <button mat-button (click)="reset()">
+        <mat-icon>restart_alt</mat-icon> Reset
+      </button>
+      @if (!revealed()) {
+        <button mat-button (click)="reveal()">
+          <mat-icon>visibility</mat-icon> Show answer
+        </button>
+      }
+    } @else {
+      <button mat-stroked-button (click)="solved.set(false); reset()">
+        <mat-icon>replay</mat-icon> Try again
+      </button>
+    }
+  </div>
+</div>

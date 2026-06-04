@@ -1,0 +1,85 @@
+<div class="app-container">
+  @if (skill(); as s) {
+    <a routerLink="/" class="back-link">
+      <mat-icon>arrow_back</mat-icon> All skills
+    </a>
+
+    <div class="course-head">
+      <div class="course-icon" [style.background]="s.color">
+        <mat-icon>{{ s.icon }}</mat-icon>
+      </div>
+      <div class="course-head-text">
+        <h1 class="page-title">{{ s.title }}</h1>
+        <p class="page-subtitle">{{ s.course?.outcome }}</p>
+        <div class="overall">
+          <mat-progress-bar
+            mode="determinate"
+            [value]="overallPercent()"
+          ></mat-progress-bar>
+          <span class="overall-label">{{ overallPercent() }}% complete</span>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-heading">Levels</h2>
+
+    <mat-accordion multi class="levels">
+      @for (level of s.course?.levels ?? []; track level.id; let i = $index) {
+        <mat-expansion-panel [expanded]="i === 0">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="level-order">{{ level.order }}</span>
+              <span class="level-title">{{ level.title }}</span>
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ levelProgress(level.id).done }}/{{
+                levelProgress(level.id).total
+              }}
+              done
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <p class="level-goal">{{ level.goal }}</p>
+
+          <mat-list>
+            @for (lesson of level.lessons; track lesson.id) {
+              <a
+                mat-list-item
+                [routerLink]="[
+                  '/skills',
+                  s.id,
+                  'levels',
+                  level.id,
+                  'lessons',
+                  lesson.id
+                ]"
+                class="lesson-row"
+              >
+                <mat-icon matListItemIcon class="lesson-status">
+                  {{
+                    isLessonComplete(level.id, lesson.id)
+                      ? 'check_circle'
+                      : 'radio_button_unchecked'
+                  }}
+                </mat-icon>
+                <span matListItemTitle>{{ lesson.title }}</span>
+                <span matListItemLine class="lesson-blurb">{{
+                  lesson.blurb
+                }}</span>
+                <span matListItemMeta class="lesson-time"
+                  >{{ lesson.minutes }} min</span
+                >
+              </a>
+            }
+          </mat-list>
+        </mat-expansion-panel>
+      }
+    </mat-accordion>
+  } @else {
+    <div class="not-found">
+      <mat-icon>error_outline</mat-icon>
+      <p>Skill not found.</p>
+      <a mat-flat-button color="primary" routerLink="/">Back to skills</a>
+    </div>
+  }
+</div>

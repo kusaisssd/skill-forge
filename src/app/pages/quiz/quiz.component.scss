@@ -1,0 +1,188 @@
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #1565c0;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.result-banner {
+  border-radius: 14px !important;
+  background: #fff4e5;
+  margin-bottom: 18px;
+}
+
+.result-banner.pass {
+  background: #e6f4ea;
+}
+
+.result-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.result-icon {
+  font-size: 40px;
+  height: 40px;
+  width: 40px;
+  color: #b7791f;
+}
+
+.result-banner.pass .result-icon {
+  color: #2e7d32;
+}
+
+.result-score {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.result-msg {
+  color: #5b6168;
+  font-size: 14px;
+}
+
+.question-card {
+  border-radius: 14px !important;
+  margin-bottom: 16px;
+}
+
+.q-prompt {
+  display: flex;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.q-num {
+  flex: 0 0 auto;
+  color: #1565c0;
+  font-weight: 700;
+}
+
+.q-hint {
+  margin: 6px 0 0 32px;
+  font-size: 13px;
+  color: #9aa1ac;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  border: 1.5px solid #e1e5ee;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14.5px;
+  color: #2b3138;
+  font-family: inherit;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.option:hover:not(:disabled) {
+  border-color: #90caf9;
+  background: #f5faff;
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.option.selected {
+  border-color: #1565c0;
+  background: #eef5ff;
+}
+
+.option.correct {
+  border-color: #2e7d32;
+  background: #e6f4ea;
+}
+
+.option.wrong {
+  border-color: #c62828;
+  background: #fdecea;
+}
+
+.option.missed {
+  border-color: #2e7d32;
+  border-style: dashed;
+  background: #f1f8f3;
+}
+
+.opt-marker {
+  flex: 0 0 auto;
+  color: #6b7280;
+}
+
+.option.selected .opt-marker {
+  color: #1565c0;
+}
+
+.option.correct .opt-marker {
+  color: #2e7d32;
+}
+
+.option.wrong .opt-marker {
+  color: #c62828;
+}
+
+.opt-text {
+  line-height: 1.45;
+}
+
+.explanation {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 12px;
+  background: #f3f6fb;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.explanation mat-icon {
+  flex: 0 0 auto;
+  color: #1565c0;
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+}
+
+.quiz-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 22px 0 10px;
+}
+
+.not-found {
+  text-align: center;
+  padding: 60px 0;
+  color: #6b7280;
+}
+
+.not-found mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  color: #cbd2dc;
+}

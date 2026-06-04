@@ -1,0 +1,64 @@
+<div class="app-container">
+  <h1 class="page-title">Your skills</h1>
+  <p class="page-subtitle">
+    Pick a skill and work through it level by level. Each course teaches you to
+    understand the concepts, read code confidently, and test yourself.
+  </p>
+
+  <div class="skill-grid">
+    @for (card of cards(); track card.skill.id) {
+      <mat-card
+        class="skill-card"
+        [class.locked]="!card.skill.available"
+        appearance="outlined"
+      >
+        <div class="card-top" [style.background]="card.skill.color">
+          <mat-icon class="skill-icon">{{ card.skill.icon }}</mat-icon>
+          <span class="difficulty">{{ card.skill.difficulty }}</span>
+        </div>
+
+        <mat-card-content class="card-body">
+          <h2 class="skill-title">{{ card.skill.title }}</h2>
+          <p class="skill-summary">{{ card.skill.summary }}</p>
+
+          <mat-chip-set aria-label="Topics">
+            @for (tag of card.skill.tags; track tag) {
+              <mat-chip disableRipple>{{ tag }}</mat-chip>
+            }
+          </mat-chip-set>
+
+          @if (card.skill.available) {
+            <div class="progress-row">
+              <mat-progress-bar
+                mode="determinate"
+                [value]="card.percent"
+              ></mat-progress-bar>
+              <span class="progress-label"
+                >{{ card.completedLessons }}/{{ card.totalLessons }} lessons</span
+              >
+            </div>
+          } @else {
+            <p class="coming-soon">
+              <mat-icon>lock</mat-icon> Course content coming soon
+            </p>
+          }
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+          @if (card.skill.available) {
+            <a
+              mat-flat-button
+              color="primary"
+              [routerLink]="['/skills', card.skill.id]"
+            >
+              {{ card.completedLessons > 0 ? 'Continue' : 'Start course' }}
+              <mat-icon>arrow_forward</mat-icon>
+            </a>
+          } @else {
+            <button mat-button disabled>Locked</button>
+          }
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
+</div>

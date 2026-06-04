@@ -1,0 +1,144 @@
+<div class="app-container">
+  @if (location(); as loc) {
+    <a
+      [routerLink]="[
+        '/skills',
+        loc.skill.id,
+        'levels',
+        loc.level.id,
+        'lessons',
+        loc.lesson.id
+      ]"
+      class="back-link"
+    >
+      <mat-icon>arrow_back</mat-icon> Back to lesson
+    </a>
+
+    <h1 class="page-title">Quiz · {{ loc.lesson.title }}</h1>
+    <p class="page-subtitle">
+      Answer every question, then submit to see your score and explanations.
+    </p>
+
+    @if (submitted()) {
+      <mat-card
+        appearance="outlined"
+        class="result-banner"
+        [class.pass]="score().correct / score().total >= 0.8"
+      >
+        <mat-card-content class="result-content">
+          <mat-icon class="result-icon">{{
+            score().correct / score().total >= 0.8
+              ? 'emoji_events'
+              : 'replay'
+          }}</mat-icon>
+          <div>
+            <div class="result-score">
+              {{ score().correct }} / {{ score().total }} correct
+            </div>
+            <div class="result-msg">
+              @if (score().correct / score().total >= 0.8) {
+                Great work — you've got a solid grip on this lesson.
+              } @else {
+                Review the explanations below, then try again.
+              }
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @for (q of questions(); track q.id; let qi = $index) {
+      <mat-card appearance="outlined" class="question-card">
+        <mat-card-content>
+          <div class="q-prompt">
+            <span class="q-num">Q{{ qi + 1 }}</span>
+            <span>{{ q.prompt }}</span>
+          </div>
+          @if (q.type === 'multiple') {
+            <p class="q-hint">Select all that apply.</p>
+          }
+
+          <div class="options">
+            @for (opt of q.options; track opt.id) {
+              <button
+                type="button"
+                class="option"
+                [class.selected]="isSelected(q.id, opt.id)"
+                [class.correct]="optionState(q, opt.id) === 'correct'"
+                [class.missed]="optionState(q, opt.id) === 'missed'"
+                [class.wrong]="optionState(q, opt.id) === 'wrong'"
+                [disabled]="submitted()"
+                (click)="
+                  q.type === 'multiple'
+                    ? toggleMultiple(q.id, opt.id)
+                    : selectSingle(q.id, opt.id)
+                "
+              >
+                <mat-icon class="opt-marker">
+                  @if (submitted() && optionState(q, opt.id) === 'correct') {
+                    check_circle
+                  } @else if (submitted() && optionState(q, opt.id) === 'wrong') {
+                    cancel
+                  } @else if (q.type === 'multiple') {
+                    {{
+                      isSelected(q.id, opt.id)
+                        ? 'check_box'
+                        : 'check_box_outline_blank'
+                    }}
+                  } @else {
+                    {{
+                      isSelected(q.id, opt.id)
+                        ? 'radio_button_checked'
+                        : 'radio_button_unchecked'
+                    }}
+                  }
+                </mat-icon>
+                <span class="opt-text">{{ opt.text }}</span>
+              </button>
+            }
+          </div>
+
+          @if (submitted()) {
+            <div class="explanation">
+              <mat-icon>info</mat-icon>
+              <span>{{ q.explanation }}</span>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+    }
+
+    <div class="quiz-actions">
+      @if (!submitted()) {
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="!canSubmit()"
+          (click)="submit()"
+        >
+          <mat-icon>done_all</mat-icon> Submit answers
+        </button>
+        @if (!canSubmit()) {
+          <span class="muted">Answer all questions to submit.</span>
+        }
+      } @else {
+        <button mat-stroked-button (click)="retry()">
+          <mat-icon>replay</mat-icon> Try again
+        </button>
+        <a
+          mat-flat-button
+          color="primary"
+          [routerLink]="['/skills', loc.skill.id]"
+        >
+          <mat-icon>list</mat-icon> Back to course
+        </a>
+      }
+    </div>
+  } @else {
+    <div class="not-found">
+      <mat-icon>error_outline</mat-icon>
+      <p>Quiz not found.</p>
+      <a mat-flat-button color="primary" routerLink="/">Back to skills</a>
+    </div>
+  }
+</div>

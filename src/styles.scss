@@ -1,0 +1,74 @@
+// SkillForge global styles + Angular Material 19 theme (modern mat.theme API)
+@use '@angular/material' as mat;
+
+html {
+  color-scheme: light;
+
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #f4f6fb;
+  color: #1a1c1e;
+  font-family: Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+}
+
+.app-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 8px 0 4px;
+}
+
+.page-subtitle {
+  color: #5b6168;
+  margin: 0 0 24px;
+  font-size: 15px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.muted {
+  color: #6b7280;
+}
+
+// Inline code used inside lesson prose
+code.inline {
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9em;
+}

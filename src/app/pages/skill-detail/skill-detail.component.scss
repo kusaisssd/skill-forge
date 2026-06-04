@@ -1,0 +1,118 @@
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #1565c0;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.course-head {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.course-icon {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.course-icon mat-icon {
+  font-size: 38px;
+  height: 38px;
+  width: 38px;
+}
+
+.course-head-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.overall {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 520px;
+}
+
+.overall mat-progress-bar {
+  flex: 1 1 auto;
+  border-radius: 6px;
+}
+
+.overall-label {
+  font-size: 13px;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.section-heading {
+  margin: 28px 0 12px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.level-order {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #1565c0;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  margin-right: 12px;
+}
+
+.level-title {
+  font-weight: 600;
+}
+
+.level-goal {
+  color: #5b6168;
+  margin: 4px 0 8px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.lesson-row {
+  border-radius: 8px;
+}
+
+.lesson-status {
+  color: #2e7d32;
+}
+
+.lesson-blurb {
+  color: #6b7280 !important;
+}
+
+.lesson-time {
+  color: #9aa1ac;
+  font-size: 12px;
+}
+
+.not-found {
+  text-align: center;
+  padding: 60px 0;
+  color: #6b7280;
+}
+
+.not-found mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  color: #cbd2dc;
+}

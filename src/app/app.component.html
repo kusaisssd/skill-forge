@@ -1,0 +1,22 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <a routerLink="/" class="brand">
+    <mat-icon>school</mat-icon>
+    <span class="brand-name">SkillForge</span>
+  </a>
+  <span class="spacer"></span>
+  <a mat-button routerLink="/">
+    <mat-icon>grid_view</mat-icon>
+    <span class="hide-sm">Skills</span>
+  </a>
+</mat-toolbar>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="app-footer">
+  <span class="muted"
+    >SkillForge · Learn by understanding, reading code, and self-testing ·
+    {{ year }}</span
+  >
+</footer>

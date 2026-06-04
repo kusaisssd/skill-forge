@@ -1,0 +1,173 @@
+<div class="app-container">
+  @if (location(); as loc) {
+    <a
+      [routerLink]="['/skills', loc.skill.id]"
+      class="back-link"
+    >
+      <mat-icon>arrow_back</mat-icon> {{ loc.skill.title }} · {{ loc.level.title }}
+    </a>
+
+    <h1 class="page-title">{{ loc.lesson.title }}</h1>
+    <p class="page-subtitle">{{ loc.lesson.blurb }} · {{ loc.lesson.minutes }} min</p>
+
+    <!-- Concept explanation -->
+    @for (block of loc.lesson.concept; track $index) {
+      <section class="concept">
+        @if (block.heading) {
+          <h2 class="concept-heading">{{ block.heading }}</h2>
+        }
+        @for (para of block.body.split('\n\n'); track $index) {
+          <p class="concept-body" [innerHTML]="para | formatText"></p>
+        }
+      </section>
+    }
+
+    <!-- Code you learn to read -->
+    @if (loc.lesson.codeSamples.length > 0) {
+      <h2 class="concept-heading">Read the code</h2>
+      @for (sample of loc.lesson.codeSamples; track $index) {
+        <h3 class="sample-title">{{ sample.title }}</h3>
+        <app-code-block [sample]="sample"></app-code-block>
+      }
+    }
+
+    <!-- Interactive practice -->
+    @if (exercises().length > 0) {
+      <h2 class="concept-heading">
+        <mat-icon class="practice-icon">fitness_center</mat-icon> Practice
+      </h2>
+      <p class="practice-intro">
+        Try these hands-on exercises. They check your answer instantly — no setup
+        needed.
+      </p>
+      @for (ex of exercises(); track ex.id) {
+        <app-exercise
+          [exercise]="ex"
+          [skillId]="loc.skill.id"
+          [levelId]="loc.level.id"
+          [lessonId]="loc.lesson.id"
+        ></app-exercise>
+      }
+    }
+
+    <!-- Key points -->
+    @if (loc.lesson.keyPoints.length > 0) {
+      <mat-card appearance="outlined" class="key-points">
+        <mat-card-content>
+          <h2 class="kp-title">
+            <mat-icon>lightbulb</mat-icon> Key takeaways
+          </h2>
+          <ul>
+            @for (point of loc.lesson.keyPoints; track $index) {
+              <li [innerHTML]="point | formatText"></li>
+            }
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    <!-- Arabic summary (ملخص بالعربية) -->
+    @if (summaryAr(); as ar) {
+      <mat-card appearance="outlined" class="summary-ar" dir="rtl" lang="ar">
+        <mat-card-content>
+          <h2 class="ar-title">
+            <mat-icon>translate</mat-icon> الملخص بالعربية
+          </h2>
+          <p class="ar-body">{{ ar }}</p>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    <mat-divider></mat-divider>
+
+    <!-- Actions -->
+    <div class="lesson-actions">
+      <button
+        mat-stroked-button
+        [color]="completed() ? 'primary' : undefined"
+        (click)="toggleComplete()"
+      >
+        <mat-icon>{{
+          completed() ? 'check_circle' : 'radio_button_unchecked'
+        }}</mat-icon>
+        {{ completed() ? 'Marked as understood' : 'I understand this' }}
+      </button>
+
+      @if (loc.lesson.quiz.length > 0) {
+        <a
+          mat-flat-button
+          color="primary"
+          [routerLink]="[
+            '/skills',
+            loc.skill.id,
+            'levels',
+            loc.level.id,
+            'lessons',
+            loc.lesson.id,
+            'quiz'
+          ]"
+        >
+          <mat-icon>quiz</mat-icon>
+          @if (quizResult(); as r) {
+            Retake quiz (best {{ r.correct }}/{{ r.total }})
+          } @else {
+            Test yourself ({{ loc.lesson.quiz.length }} questions)
+          }
+        </a>
+      }
+    </div>
+
+    <!-- Prev / next -->
+    <div class="pager">
+      @if (adjacent().prev; as prev) {
+        <a
+          mat-button
+          [routerLink]="[
+            '/skills',
+            prev.skillId,
+            'levels',
+            prev.levelId,
+            'lessons',
+            prev.lessonId
+          ]"
+          class="pager-link"
+        >
+          <mat-icon>chevron_left</mat-icon>
+          <span class="pager-text">
+            <small>Previous</small>
+            <span>{{ prev.lessonTitle }}</span>
+          </span>
+        </a>
+      } @else {
+        <span></span>
+      }
+
+      @if (adjacent().next; as next) {
+        <a
+          mat-button
+          [routerLink]="[
+            '/skills',
+            next.skillId,
+            'levels',
+            next.levelId,
+            'lessons',
+            next.lessonId
+          ]"
+          class="pager-link next"
+        >
+          <span class="pager-text align-right">
+            <small>Next</small>
+            <span>{{ next.lessonTitle }}</span>
+          </span>
+          <mat-icon>chevron_right</mat-icon>
+        </a>
+      }
+    </div>
+  } @else {
+    <div class="not-found">
+      <mat-icon>error_outline</mat-icon>
+      <p>Lesson not found.</p>
+      <a mat-flat-button color="primary" routerLink="/">Back to skills</a>
+    </div>
+  }
+</div>
