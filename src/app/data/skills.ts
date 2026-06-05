@@ -1,6 +1,10 @@
 import { Skill } from '../models/course.model';
 import { ANGULAR_COURSE } from './angular-course';
 import { TYPESCRIPT_COURSE } from './typescript-course';
+import { RXJS_COURSE } from './rxjs-course';
+import { GIT_COURSE } from './git-course';
+import { CSS_COURSE } from './css-course';
+import { TESTING_COURSE } from './testing-course';
 
 /**
  * The catalog of skills shown on the hub.
@@ -42,8 +46,9 @@ export const SKILLS: Skill[] = [
     summary:
       'Think in streams: observables, operators, and reactive patterns for handling async data.',
     tags: ['Reactive', 'Async', 'Streams'],
-    difficulty: 'Intermediate',
-    available: false,
+    difficulty: 'Intermediate → Advanced',
+    available: true,
+    course: RXJS_COURSE,
   },
   {
     id: 'css-layout',
@@ -53,8 +58,9 @@ export const SKILLS: Skill[] = [
     summary:
       'Flexbox, grid, and responsive design — read and write layouts that work everywhere.',
     tags: ['Frontend', 'Design', 'Responsive'],
-    difficulty: 'Beginner → Intermediate',
-    available: false,
+    difficulty: 'Beginner → Advanced',
+    available: true,
+    course: CSS_COURSE,
   },
   {
     id: 'git',
@@ -64,8 +70,9 @@ export const SKILLS: Skill[] = [
     summary:
       'Branches, merges, rebases, and a mental model for collaborating on code without fear.',
     tags: ['Tooling', 'Workflow', 'Collaboration'],
-    difficulty: 'Beginner → Intermediate',
-    available: false,
+    difficulty: 'Beginner → Advanced',
+    available: true,
+    course: GIT_COURSE,
   },
   {
     id: 'testing',
@@ -75,7 +82,8 @@ export const SKILLS: Skill[] = [
     summary:
       'Unit, integration, and end-to-end testing — what to test, how, and why it pays off.',
     tags: ['Quality', 'Automation', 'Confidence'],
-    difficulty: 'Intermediate',
-    available: false,
+    difficulty: 'Beginner → Advanced',
+    available: true,
+    course: TESTING_COURSE,
   },
 ];

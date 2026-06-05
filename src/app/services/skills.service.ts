@@ -8,16 +8,32 @@ import {
 } from '../data/angular-summaries-ar';
 import { TYPESCRIPT_EXERCISES } from '../data/typescript-exercises';
 import { TYPESCRIPT_SUMMARIES_AR } from '../data/typescript-summaries-ar';
+import { RXJS_EXERCISES } from '../data/rxjs-exercises';
+import { RXJS_SUMMARIES_AR } from '../data/rxjs-summaries-ar';
+import { GIT_EXERCISES } from '../data/git-exercises';
+import { GIT_SUMMARIES_AR } from '../data/git-summaries-ar';
+import { CSS_EXERCISES } from '../data/css-exercises';
+import { CSS_SUMMARIES_AR } from '../data/css-summaries-ar';
+import { TESTING_EXERCISES } from '../data/testing-exercises';
+import { TESTING_SUMMARIES_AR } from '../data/testing-summaries-ar';
 
 /** Per-skill registries — add an entry here when authoring a new skill. */
 const EXERCISES_BY_SKILL: Record<string, Record<string, Exercise[]>> = {
   angular: ANGULAR_EXERCISES,
   typescript: TYPESCRIPT_EXERCISES,
+  rxjs: RXJS_EXERCISES,
+  git: GIT_EXERCISES,
+  'css-layout': CSS_EXERCISES,
+  testing: TESTING_EXERCISES,
 };
 
 const SUMMARIES_BY_SKILL: Record<string, Record<string, ArabicSection>> = {
   angular: ANGULAR_SUMMARIES_AR,
   typescript: TYPESCRIPT_SUMMARIES_AR,
+  rxjs: RXJS_SUMMARIES_AR,
+  git: GIT_SUMMARIES_AR,
+  'css-layout': CSS_SUMMARIES_AR,
+  testing: TESTING_SUMMARIES_AR,
 };
 
 export interface LessonLocation {
