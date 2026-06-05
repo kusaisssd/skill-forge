@@ -1,5 +1,6 @@
 import { Skill } from '../models/course.model';
 import { ANGULAR_COURSE } from './angular-course';
+import { TYPESCRIPT_COURSE } from './typescript-course';
 
 /**
  * The catalog of skills shown on the hub.
@@ -30,7 +31,8 @@ export const SKILLS: Skill[] = [
       'Master types, interfaces, generics, and the type system that powers modern web development.',
     tags: ['Language', 'Types', 'Tooling'],
     difficulty: 'Beginner → Advanced',
-    available: false,
+    available: true,
+    course: TYPESCRIPT_COURSE,
   },
   {
     id: 'rxjs',

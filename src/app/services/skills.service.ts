@@ -6,6 +6,19 @@ import {
   ANGULAR_SUMMARIES_AR,
   ArabicSection,
 } from '../data/angular-summaries-ar';
+import { TYPESCRIPT_EXERCISES } from '../data/typescript-exercises';
+import { TYPESCRIPT_SUMMARIES_AR } from '../data/typescript-summaries-ar';
+
+/** Per-skill registries — add an entry here when authoring a new skill. */
+const EXERCISES_BY_SKILL: Record<string, Record<string, Exercise[]>> = {
+  angular: ANGULAR_EXERCISES,
+  typescript: TYPESCRIPT_EXERCISES,
+};
+
+const SUMMARIES_BY_SKILL: Record<string, Record<string, ArabicSection>> = {
+  angular: ANGULAR_SUMMARIES_AR,
+  typescript: TYPESCRIPT_SUMMARIES_AR,
+};
 
 export interface LessonLocation {
   skill: Skill;
@@ -38,18 +51,12 @@ export class SkillsService {
 
   /** Interactive exercises for a lesson (empty if none authored). */
   getExercises(skillId: string, lessonId: string): Exercise[] {
-    if (skillId === 'angular') {
-      return ANGULAR_EXERCISES[lessonId] ?? [];
-    }
-    return [];
+    return EXERCISES_BY_SKILL[skillId]?.[lessonId] ?? [];
   }
 
   /** Arabic section (ملخص + تفاصيل أوسع) for a lesson, if authored. */
   getSummaryAr(skillId: string, lessonId: string): ArabicSection | undefined {
-    if (skillId === 'angular') {
-      return ANGULAR_SUMMARIES_AR[lessonId];
-    }
-    return undefined;
+    return SUMMARIES_BY_SKILL[skillId]?.[lessonId];
   }
 
   getLevel(skillId: string, levelId: string): Level | undefined {
