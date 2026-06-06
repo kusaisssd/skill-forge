@@ -16,6 +16,10 @@ import { CSS_EXERCISES } from '../data/css-exercises';
 import { CSS_SUMMARIES_AR } from '../data/css-summaries-ar';
 import { TESTING_EXERCISES } from '../data/testing-exercises';
 import { TESTING_SUMMARIES_AR } from '../data/testing-summaries-ar';
+import { ASPNET_EXERCISES } from '../data/aspnet-exercises';
+import { ASPNET_SUMMARIES_AR } from '../data/aspnet-summaries-ar';
+import { API_EXERCISES } from '../data/api-exercises';
+import { API_SUMMARIES_AR } from '../data/api-summaries-ar';
 
 /** Per-skill registries — add an entry here when authoring a new skill. */
 const EXERCISES_BY_SKILL: Record<string, Record<string, Exercise[]>> = {
@@ -25,6 +29,8 @@ const EXERCISES_BY_SKILL: Record<string, Record<string, Exercise[]>> = {
   git: GIT_EXERCISES,
   'css-layout': CSS_EXERCISES,
   testing: TESTING_EXERCISES,
+  aspnet: ASPNET_EXERCISES,
+  'api-comm': API_EXERCISES,
 };
 
 const SUMMARIES_BY_SKILL: Record<string, Record<string, ArabicSection>> = {
@@ -34,6 +40,8 @@ const SUMMARIES_BY_SKILL: Record<string, Record<string, ArabicSection>> = {
   git: GIT_SUMMARIES_AR,
   'css-layout': CSS_SUMMARIES_AR,
   testing: TESTING_SUMMARIES_AR,
+  aspnet: ASPNET_SUMMARIES_AR,
+  'api-comm': API_SUMMARIES_AR,
 };
 
 export interface LessonLocation {

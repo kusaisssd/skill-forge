@@ -5,6 +5,8 @@ import { RXJS_COURSE } from './rxjs-course';
 import { GIT_COURSE } from './git-course';
 import { CSS_COURSE } from './css-course';
 import { TESTING_COURSE } from './testing-course';
+import { ASPNET_COURSE } from './aspnet-course';
+import { API_COURSE } from './api-course';
 
 /**
  * The catalog of skills shown on the hub.
@@ -85,5 +87,29 @@ export const SKILLS: Skill[] = [
     difficulty: 'Beginner → Advanced',
     available: true,
     course: TESTING_COURSE,
+  },
+  {
+    id: 'aspnet',
+    title: 'ASP.NET Core',
+    icon: 'dns',
+    color: 'linear-gradient(135deg, #512bd4, #6c3fd4)',
+    summary:
+      'Build backends with .NET and C# — project structure, web APIs, EF Core data, architecture, security, and deployment.',
+    tags: ['Backend', 'C#', '.NET', 'APIs'],
+    difficulty: 'Beginner → Advanced',
+    available: true,
+    course: ASPNET_COURSE,
+  },
+  {
+    id: 'api-comm',
+    title: 'Frontend ↔ Backend APIs',
+    icon: 'sync_alt',
+    color: 'linear-gradient(135deg, #0a8f6c, #0d7a8f)',
+    summary:
+      'How the frontend and backend talk: HTTP & REST, designing endpoints, fetching data, auth & security, and real-time.',
+    tags: ['HTTP', 'REST', 'Auth', 'Integration'],
+    difficulty: 'Beginner → Advanced',
+    available: true,
+    course: API_COURSE,
   },
 ];
